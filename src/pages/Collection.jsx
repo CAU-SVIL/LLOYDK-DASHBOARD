@@ -77,7 +77,7 @@ const Home = () => {
 
   return (
     <Container>
-      <Title>{`Collection "${collectionName}"의 목록`}</Title>
+      <Title>{`Collection "${collectionName}"의 Docs`}</Title>
       <Time>{time ? "마지막 조회 시간: " + time : "loading..."}</Time>
       <DocsList>
       {docs ? (
