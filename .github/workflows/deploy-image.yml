@@ -6,7 +6,7 @@ on:
 
 jobs:
   build:
-    name: Build
+    name: Build and Push Docker images
     runs-on: ubuntu-latest
 
     steps:
@@ -23,17 +23,13 @@ jobs:
 
       - name: Build project
         run: npm run build
-  
-  build_and_push:
-    runs-on: ubuntu-latest
-    steps:
-
-    - name: Build and Push Docker Images
-      env:
-        DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
-        DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_TOKEN }}
-      run: |
-        IMAGE_NAME="taeng0204/dashboard"
-        docker build -t $IMAGE_NAME .
-        docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD
-        docker push $IMAGE_NAME
+      
+      - name: Build and Push Docker Images
+        env:
+          DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+          DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_TOKEN }}
+        run: |
+          IMAGE_NAME="taeng0204/dashboard"
+          docker build -t $IMAGE_NAME .
+          docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD
+          docker push $IMAGE_NAME
