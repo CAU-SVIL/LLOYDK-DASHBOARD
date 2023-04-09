@@ -4,46 +4,139 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 
 const Container = styled.main`
-  background-color: #80CDE0;
   width: 100vw;
   height: 100vh;
-  padding: 10px;
   display: flex;
-  flex-direction: column;
-  gap: 30px;
 `
-
-const Title = styled.h1`
-  color: #EFE9E7;
-  font-size: 60px;
-  font-weight: bold;
+const Nav = styled.aside`
+  min-width: 200px;
+  background-color: #354052;
+  border-right: 1px solid black;
 `
-
-const Time = styled.div`
-  color: #EFE9E7;
-  font-size: 30px;
-  font-weight: bold;
-`
-
-const CollectionList = styled.ul`
-  background-color: #95EDB2;
+const Main = styled.main`
   flex-grow: 1;
-  border-radius: 15px;
-  padding: 30px 15px;
   display: flex;
   flex-direction: column;
+`
+const Header = styled.header`
+  background-color: white;
+  min-height: 100px;
+  border-bottom: 1px solid black;
+  display: flex;
+`
+const Section = styled.section`
+  background-color: #EBF1F5;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+`
+const Hamberger = styled.div`
+  border-right: 1px solid black;
+  width: 100px;
+`
+const SearchBox = styled.div`
+  border-right: 1px solid black;
+  min-width: 200px;
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+  gap: 20px;
+`
+const Search = styled.input`
+  height: 40px;
+  font-size: 18px;
+  border: none;
+  &:focus {
+    outline: none;
+  }
+`
+const Calendar = styled.div`
+  border-right: 1px solid black;
+  width: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+const People = styled.div`
+  background-color: #15A3F9;
+  width: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+const Graph = styled.div`
+  height: 200px;
+  border-bottom: 1px solid gray;
+`
+const Collections = styled.div`
+  flex-grow: 1;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
   gap: 30px;
 `
-
-const Collection = styled.li`
-  color: #7F7BED;
-  font-size: 50px;
+const Collection = styled(Link)`
+  background-color: white;
+  height: 120px;
+  border-radius: 30px;
+  box-shadow: 0 0 8px 4px rgba(0,0,0,.12);
+  padding: 15px;
+  display: flex;
+`
+const ColLeft = styled.div`
+  flex-grow: 1;
+  display: flex;
+  gap: 10px;
+  flex-direction: column;  
+`
+const ColRight = styled.div`
+  color: #586678;
+  width: 120px;
+  span {
+    color: #5A8E66;
+  }
+`
+const ColName = styled.div`
   font-weight: bold;
-  cursor: pointer;
-  border-radius: 12px;
+  font-size: 23px;
+  span {
+    color: #BD4527;
+  }
+`
+const ColData = styled.div`
+  font-size: 18px;
+  span {
+    color: #5A8E66;
+  }
+`
+const Logo = styled.div`
+  height: 200px;
+  border-bottom: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+const Lab = styled.img`
+  width: 140px;
+  border-radius: 20%;
+`
+const NavList = styled.div`
+  height: 300px;
+  border-bottom: 1px solid black;
   padding: 20px;
-  background-color: #EFE9E7;
-  box-shadow: 0 0 8px 4px rgba(0,0,0,.1);
+`
+const NavName = styled.div`
+  color: #9EA9BD;
+  display: flex;
+  margin-bottom: 10px;
+  span {
+    margin-top: 10px;
+  }
+`
+const NavImg = styled.img`
+  height: 35px;
 `
 
 const Home = () => {
@@ -51,13 +144,10 @@ const Home = () => {
   const [collections, setCollections] = useState();
 
   const getCollections = async () => {
-    const res = await axios.get("http://172.19.0.2:80/collections");
-    // const res = await axios.get("http://localhost:80");
+    const res = await axios.get("http://localhost:8000/collections");
     setTime(res.data.time);
     setCollections(res.data.collections);
   }
-
-
 
   useEffect(() => {
     getCollections();
@@ -65,18 +155,66 @@ const Home = () => {
 
   return (
     <Container>
-      <Title>DB 목록</Title>
-      <Time>{time ? "마지막 조회 시간: " + time : "loading..."}</Time>
-      <CollectionList>
-        {collections ? (
-          collections.map((item) => (
-            <Link to={"collection/" + item} key={item}>
-              <Collection>{item}</Collection>
-            </Link>
-          ))) : (
-          "loading..."
-        )}
-      </CollectionList>
+      <Nav>
+        <Logo>
+          <Lab src="/assets/SVIL.jpg" />
+        </Logo>
+        <NavList>
+          <NavName>
+            <NavImg src="/assets/home.png" />
+            <span>Main Page</span>
+          </NavName>
+          <NavName>
+            <NavImg src="/assets/database.png" style={{ "height": "27px", "marginLeft": "5px" }} />
+            <span style={{ "marginTop": "7px", "marginLeft": "5px" }}>DB Collection</span>
+          </NavName>
+          <NavName>
+            <NavImg src="/assets/healthcheck.png" />
+            <span>Health Check</span>
+          </NavName>
+          <NavName>
+            <NavImg src="/assets/task.png" />
+            <span>Task</span>
+          </NavName>
+        </NavList>
+      </Nav>
+      <Main>
+        <Header>
+          <Hamberger>
+            햄버거
+          </Hamberger>
+          <SearchBox>
+            <img style={{ "width": "40px" }} src="/assets/search.png" />
+            <Search type="input" placeholder="검색어를 입력해 주세요" />
+          </SearchBox>
+          <Calendar>
+            <img style={{ "width": "40px" }} src="/assets/calendar.png" />
+          </Calendar>
+          <People>
+            <img style={{ "width": "80px" }} src="/assets/people.png" />
+          </People>
+        </Header>
+        <Section>
+          <Graph>&nbsp;</Graph>
+          <Collections>
+            {collections ? (
+              collections.map((item) => (
+                <Collection to={"collection/" + item} key={item}>
+                  <ColLeft>
+                    <ColName>Collection name: <span>{item}</span></ColName>
+                    <ColData>First Collection Data : <span>무언가</span></ColData>
+                    <ColData>Last Collection Data : <span>무언가</span></ColData>
+                  </ColLeft>
+                  <ColRight>
+                    총 Docs 개수: <span>32</span>
+                  </ColRight>
+                </Collection>
+              ))) : (
+              "loading..."
+            )}
+          </Collections>
+        </Section>
+      </Main>
     </Container>
   );
 };
