@@ -27,6 +27,8 @@ const Header = styled.header`
 const Section = styled.section`
   background-color: #EBF1F5;
   flex-grow: 1;
+  overflow: hidden;
+
   display: flex;
   flex-direction: column;
 `
@@ -72,6 +74,23 @@ const Graph = styled.div`
 const Collections = styled.div`
   flex-grow: 1;
   min-height: 200px;
+  overflow-y: scroll;
+  &::-webkit-scrollbar {
+    width: 12px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: #C3C5C7;
+    border-radius: 10px;
+    background-clip: padding-box;
+    border: 2px solid transparent;
+  }
+  &::-webkit-scrollbar-track {
+    display: none;
+  }
+  &::-webkit-scrollbar-track-piece:end {
+    margin-bottom: 10px; 
+  }
+  
   display: flex;
   flex-direction: column;
   padding: 20px;
@@ -145,8 +164,9 @@ const Home = () => {
 
   const getCollections = async () => {
     const res = await axios.get("http://localhost:8000/collections");
+    console.log(res);
     setTime(res.data.time);
-    setCollections(res.data.collections);
+    setCollections(res.data.data);
   }
 
   useEffect(() => {

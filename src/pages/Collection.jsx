@@ -52,19 +52,23 @@ const DocsTime = styled.div`
   
 `
 
-const DocsData = styled.div`
+const Tr = styled.tr`
   font-size: 30px;
-  flex-grow: 1;
+`
+const Th = styled.th`
+  font-size: 35px;
+  font-weight: bolder;
 `
 
 const Home = () => {
-  const {collectionName} = useParams();
+  const { collectionName } = useParams();
   const [time, setTime] = useState("");
   const [docs, setDocs] = useState();
 
 
   const getDocs = async () => {
     const res = await axios.get("http://localhost:8000/collection/" + collectionName);
+    console.log(res)
     setTime(res.data.time);
     setDocs(res.data.data);
   }
@@ -79,11 +83,24 @@ const Home = () => {
       <Title>{`Collection "${collectionName}"의 Docs`}</Title>
       <Time>{time ? "마지막 조회 시간: " + time : "loading..."}</Time>
       <DocsList>
-      {docs ? (
+        {docs ? (
           docs.map((item) => (
             <Docs key={item._id}>
               <DocsTime>{`Save Time: ${item.time}`}</DocsTime>
-              <DocsData>{`Data: ${item.data}`}</DocsData>
+              <table>
+                <Tr>
+                  {Object.keys(item.data[0]).map((r) => (
+                    <Th>{r}</Th>
+                  ))}
+                </Tr>
+                {item.data.map((data) => (
+                <Tr>
+                  {Object.values(data).map((r) => (
+                    <td>{r}</td>
+                  ))}
+                </Tr>
+              ))}
+              </table>
             </Docs>
           ))) : (
           "loading..."
