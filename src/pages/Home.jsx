@@ -177,23 +177,23 @@ const Home = () => {
     <Container>
       <Nav>
         <Logo>
-          <Lab src="/assets/SVIL.jpg" />
+          <Lab src="/src/assets/SVIL.jpg" />
         </Logo>
         <NavList>
           <NavName>
-            <NavImg src="/assets/home.png" />
+            <NavImg src="/src/assets/home.png" />
             <span>Main Page</span>
           </NavName>
           <NavName>
-            <NavImg src="/assets/database.png" style={{ "height": "27px", "marginLeft": "5px" }} />
+            <NavImg src="/src/assets/database.png" style={{ "height": "27px", "marginLeft": "5px" }} />
             <span style={{ "marginTop": "7px", "marginLeft": "5px" }}>DB Collection</span>
           </NavName>
           <NavName>
-            <NavImg src="/assets/healthcheck.png" />
+            <NavImg src="/src/assets/healthcheck.png" />
             <span>Health Check</span>
           </NavName>
           <NavName>
-            <NavImg src="/assets/task.png" />
+            <NavImg src="/src/assets/task.png" />
             <span>Task</span>
           </NavName>
         </NavList>
@@ -204,14 +204,14 @@ const Home = () => {
             햄버거
           </Hamberger>
           <SearchBox>
-            <img style={{ "width": "40px" }} src="/assets/search.png" />
+            <img style={{ "width": "40px" }} src="/src/assets/search.png" />
             <Search type="input" placeholder="검색어를 입력해 주세요" />
           </SearchBox>
           <Calendar>
-            <img style={{ "width": "40px" }} src="/assets/calendar.png" />
+            <img style={{ "width": "40px" }} src="/src/assets/calendar.png" />
           </Calendar>
           <People>
-            <img style={{ "width": "80px" }} src="/assets/people.png" />
+            <img style={{ "width": "80px" }} src="/src/assets/people.png" />
           </People>
         </Header>
         <Section>
