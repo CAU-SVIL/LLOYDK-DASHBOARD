@@ -163,7 +163,7 @@ const Home = () => {
   const [collections, setCollections] = useState();
 
   const getCollections = async () => {
-    const res = await axios.get("http://localhost:8000/collections");
+    const res = await axios.get("http://115.93.184.3:5116/api/v1/collections");
     console.log(res);
     setTime(res.data.time);
     setCollections(res.data.data);

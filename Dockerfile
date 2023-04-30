@@ -19,7 +19,7 @@ RUN rm /etc/nginx/conf.d/default.conf
 # host pc 의 default.conf 를 아래 경로에 복사
 COPY ./default.conf /etc/nginx/conf.d
 
-EXPOSE 80
+EXPOSE 8888
 
 # container 실행 시 자동으로 실행할 command. nginx 시작함
 CMD ["nginx", "-g", "daemon off;"]

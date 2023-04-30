@@ -67,7 +67,7 @@ const Home = () => {
 
 
   const getDocs = async () => {
-    const res = await axios.get("http://localhost:8000/collection/" + collectionName);
+    const res = await axios.get("http://115.93.184.3:5116/api/v1/collection/" + collectionName);
     console.log(res)
     setTime(res.data.time);
     setDocs(res.data.data);
